@@ -20,7 +20,8 @@ Verwendete Container:
 
 Ich habe alles versucht, aber mein vote-node will einfach nicht mit der Postgres verbinden. Hier die gesamte Ausgabe:
 
-`hubert-schwaiger@hubert-schwaiger-3-04:~/Dokumente/Joanneum/CAD2/Nestler/CAD2_UE02-main_rewritten/CAD2_UE02-main$ docker-compose up --build
+```bash
+hubert-schwaiger@hubert-schwaiger-3-04:~/Dokumente/Joanneum/CAD2/Nestler/CAD2_UE02-main_rewritten/CAD2_UE02-main$ docker-compose up --build
 Creating network "cad2_ue02-main_backend" with the default driver
 Creating volume "cad2_ue02-main_db-data" with default driver
 Building vote
