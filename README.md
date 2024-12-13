@@ -20,7 +20,7 @@ Verwendete Container:
 
 Ich habe alles versucht, aber mein vote-node will einfach nicht mit der Postgres verbinden. Hier die gesamte Ausgabe:
 
-hubert-schwaiger@hubert-schwaiger-3-04:~/Dokumente/Joanneum/CAD2/Nestler/CAD2_UE02-main_rewritten/CAD2_UE02-main$ docker-compose up --build
+`hubert-schwaiger@hubert-schwaiger-3-04:~/Dokumente/Joanneum/CAD2/Nestler/CAD2_UE02-main_rewritten/CAD2_UE02-main$ docker-compose up --build
 Creating network "cad2_ue02-main_backend" with the default driver
 Creating volume "cad2_ue02-main_db-data" with default driver
 Building vote
@@ -184,6 +184,6 @@ db_1      | 2024-12-13 22:34:08.780 UTC [1] LOG:  listening on Unix socket "/var
 db_1      | 2024-12-13 22:34:08.785 UTC [56] LOG:  database system was shut down at 2024-12-13 22:34:08 UTC
 db_1      | 2024-12-13 22:34:08.791 UTC [1] LOG:  database system is ready to accept connections
 vote_1    | 172.21.0.1 - - [13/Dec/2024 22:35:30] "GET / HTTP/1.1" 200 -
-vote_1    | 172.21.0.1 - - [13/Dec/2024 22:35:30] "GET /favicon.ico HTTP/1.1" 404 -
+vote_1    | 172.21.0.1 - - [13/Dec/2024 22:35:30] "GET /favicon.ico HTTP/1.1" 404 -`
 
 
