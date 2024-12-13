@@ -1,47 +1,59 @@
-version: '3.8'
-
+version: "3.8"
 services:
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
+  redis:
+    image: "redis:alpine"
     networks:
-      - app-network
-
-  backend:
-    build: ./backend
-    environment:
-      - DB_HOST=db
-      - DB_USER=user
-      - DB_PASSWORD=password
-      - DB_NAME=mydatabase
-    networks:
-      - app-network
-
-  db:
-    image: mysql:5.7
-    environment:
-      - MYSQL_ROOT_PASSWORD=rootpassword
-      - MYSQL_DATABASE=mydatabase
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - app-network
-
-  proxy:
-    build: ./proxy
-    ports:
-      - "8080:80"
-    networks:
-      - app-network
-    depends_on:
-      - frontend
       - backend
 
-volumes:
-  db_data:
+  db:
+    image: "postgres:13-alpine"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - backend
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+  
+  vote:
+    build: ./vote
+    ports:
+      - "3000:80"
+    networks:
+      - backend
+    depends_on:
+      - redis
+      
+  worker:
+    build: ./worker
+    networks:
+      - backend
+    depends_on:
+      - redis
+
+  result:
+    build: ./result
+    ports:
+      - "3001:80"
+    networks:
+      - backend
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres
 
 networks:
-  app-network:
+  backend:
+
+volumes:
+  db-data:
