@@ -5,7 +5,7 @@ const app = express();
 const client = new Client({
   user: "postgres",
   host: "db",
-  database: "votes",
+  database: "postgres",
   password: "postgres",
   port: 5432,
 });
